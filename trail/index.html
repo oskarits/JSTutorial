@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Task2B</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .trail { 
+          position: absolute;
+          height: 6px; width: 6px;
+          border-radius: 3px;
+          background: rgb(1, 131, 23);
+        }
+        body {
+          height: 300px;
+        }
+      </style>
+</head>
+<body>
+</body>
+<script>
+// array of dots with the trail-style
+let sparkles = [];
+for (let i = 0; i < 50; i++) {
+    let trail = document.createElement('div');
+    trail.className = 'trail';
+    document.body.appendChild(trail);
+    sparkles.push(trail);
+};
+// Must be in global scope, or only 1 will follow and rest will be in 0,0
+let current = 0;
+window.addEventListener('mousemove', event => {
+    let spark = sparkles[current];
+    // 5 added to make a line, otherwise they will clump
+    spark.style.left = (event.pageX + 5) + 'px';
+    spark.style.top = (event.pageY + 5) + 'px';
+    // Move onto the next one
+    current = (current + 1) % sparkles.length;
+});
+</script>
+</html>
