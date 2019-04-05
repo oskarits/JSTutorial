@@ -7,62 +7,93 @@
     <title>Task B</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-
     <style>
         .container {
-          width: 500px;
-          clear: both;
-      }
+            width: 500px;
+            clear: both;
+        }
 
-      .container input {
-          width: 100%;
-          clear: both;
-      } 
-
-  </style>
+        .container input {
+            width: 100%;
+            clear: both;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Form validation JavaScript</h1>
 
-    <form>
-        <div class="container">
-            <form name="myform" novalidate onsubmit="return filled()">
-                First Name: <input name="name" type="text" required> 
-                Last Name: <input name="name" type="text" required>
-                Email: <input type="email" required pattern="+@+">
-                Phone Number: <input name="phone" type="tel"> !DONE
-                Address: <input name="address" type="text"> !DONE
-                Postal Code: <input name="postal" type="number"> !DONE
-                Password: <input type="password" required>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-    </form>
+    <div class="container">
+        <form name="info" novalidate">
+            First Name: <input name="fname" type="text">
+            Last Name: <input name="lname" type="text">
+            Email: <input name="email" type="email">
+            Phone Number: <input name="phone" type="tel">
+            Address: <input name="address" type="text">
+            Postal Code: <input name="postal" type="number">
+            Password: <input name="passw" type="password">
+            <button type="submit" onclick="valid()">Submit</button>
+        </form>
+    </div>
     <script type="text/javascript">
-    // Checks that the required fields aren'e emtpy
-        const filled = () => {
-            const reqs = [];
-            document.getElementsByName("name").forEach(function(item, index)) {
-                reqs.push(index);
-            };
-
-            // reqs.forEach(function(item)) {
-            //     if (item == "") {
-            //         alert(item + " must be filled out");
-            //     }
-            // }
-        };
-        // Numericals
+        'use strict';
         const num = document.getElementsByName('phone')[0];
         const postal = document.getElementsByName('postal')[0];
-        num.setAttribute("pattern", "'\+358'-[0-9]{3}-[0-9]{3}-[0-9]{3}");
-        postal.setAttribute("pattern", "[0-9]{5}")
+        num.setAttribute("pattern", "\\+358[0-9]{9}");
+        postal.setAttribute("pattern", "[0-9]{5}");
+        const email = document.forms.info.email;
+        email.setAttribute("pattern", ".+@.+");
 
-
-    </script>
+        const valid = () => {
+            const form = document.forms.info;
+            const fname = info.elements.fname;
+            const lname = info.elements.lname; 
+            const email = info.elements.email;
+            const passw = info.elements.passw;
+            const fields = [];
+            fields.push(fname, lname, email, passw);
+            fields.forEach(function (item, index) {
+                if (item.value == "") {
+                    alert(item.name + " is missing");
+                    item.focus();
+                    return false;
+                } 
+            });
+        }
+/*        const but = document.getElementsByTagName('button')[0];
+                but.addEventListener('click', function(e) {
+                    console.log('submit');
+                    return filled();
+                });
+        
+                // Checks that the required fields aren'e empty (names, email, password
+                const email = document.getElementsByName('email')[0];
+                // Numericals
+                const num = document.getElementsByName('phone')[0];
+                const postal = document.getElementsByName('postal')[0];
+                num.setAttribute("pattern", "\+358[0-9]{9}");
+                postal.setAttribute("pattern", "[0-9]{5}");
+        //        email.setAttribute("pattern", "+@+");
+        
+                const filled = () => {
+                    const reqs = [];
+                    document.getElementsByName('name').forEach(
+                        function (item, index) {
+                            reqs.push(index);
+                        });
+                    reqs.push(email);
+                    const pass = document.getElementsByName('pass')[0];
+                    reqs.push(pass);
+                    reqs.forEach(function(item, index) {
+                        if (item == "") {
+                            alert(item + " must be filled in");
+                            return false;
+                            console.log('no');
+                        }
+                    });
+                    console.log('yeah');
+                };
+           */</script>
 </body>
 
 </html>
