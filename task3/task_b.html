@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Task B</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+
+    <style>
+        .container {
+          width: 500px;
+          clear: both;
+      }
+
+      .container input {
+          width: 100%;
+          clear: both;
+      } 
+
+  </style>
+</head>
+
+<body>
+    <h1>Form validation JavaScript</h1>
+
+    <form>
+        <div class="container">
+            <form name="myform" novalidate onsubmit="return filled()">
+                First Name: <input name="name" type="text" required> 
+                Last Name: <input name="name" type="text" required>
+                Email: <input type="email" required pattern="+@+">
+                Phone Number: <input name="phone" type="tel"> !DONE
+                Address: <input name="address" type="text"> !DONE
+                Postal Code: <input name="postal" type="number"> !DONE
+                Password: <input type="password" required>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </form>
+    <script type="text/javascript">
+    // Checks that the required fields aren'e emtpy
+        const filled = () => {
+            const reqs = [];
+            document.getElementsByName("name").forEach(function(item, index)) {
+                reqs.push(index);
+            };
+
+            // reqs.forEach(function(item)) {
+            //     if (item == "") {
+            //         alert(item + " must be filled out");
+            //     }
+            // }
+        };
+        // Numericals
+        const num = document.getElementsByName('phone')[0];
+        const postal = document.getElementsByName('postal')[0];
+        num.setAttribute("pattern", "'\+358'-[0-9]{3}-[0-9]{3}-[0-9]{3}");
+        postal.setAttribute("pattern", "[0-9]{5}")
+
+
+    </script>
+</body>
+
+</html>
